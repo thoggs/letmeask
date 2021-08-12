@@ -1,18 +1,11 @@
-import {useState} from "react";
-
-type ButtonProps = {
-    text?: string;
-}
+import {ButtonHTMLAttributes } from "react";
+import '../styles/button.scss'
 
 
-export function OutlineButton(props: ButtonProps) {
-    const [counter, setCounter] = useState(0);
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement>
 
-    function increment() {
-        setCounter(counter + 1)
-    }
-
+export function Button(props: ButtonProps) {
     return (
-        <button onClick={increment}>{props.text} - {counter}</button>
+        <button className='button' {...props}/>
     )
 }

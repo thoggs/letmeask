@@ -1,11 +1,18 @@
-import {OutlineButton} from "./components/Button";
+import {Home} from "./pages/Home";
+import {NewRoom} from "./pages/NewRoom";
+import {BrowserRouter, Route} from "react-router-dom";
+import {AuthContextProvider} from "./contexts/authContext";
+import '../src/styles/global.scss'
+
 
 function App() {
     return (
-        <div>
-            <h1>Start do App</h1>
-            <OutlineButton text={'Ola Teste'}/>
-        </div>
+        <BrowserRouter>
+            <AuthContextProvider>
+                <Route path='/' exact component={Home}/>
+                <Route path='/rooms/new' component={NewRoom}/>
+            </AuthContextProvider>
+        </BrowserRouter>
     );
 }
 

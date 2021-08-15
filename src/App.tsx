@@ -3,10 +3,7 @@ import {NewRoom} from "./pages/NewRoom";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import {AuthContextProvider} from "./contexts/authContext";
 import {Room} from "./pages/Room";
-
-
 import '../src/styles/global.scss'
-
 
 
 function App() {

@@ -6,8 +6,8 @@ import {FormEvent, useEffect, useState} from "react";
 import {useAuth} from "../hooks/useAuth";
 import {toast, Toaster} from "react-hot-toast";
 import {database} from "../services/firebase";
-import '../styles/room.scss';
 import firebase from "firebase/app";
+import '../styles/room.scss';
 
 
 type FirebaseQuestions = Record<string, {

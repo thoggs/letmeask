@@ -67,7 +67,7 @@ export function Room() {
                 setTitle(dataBaseRoom.title);
                 setQuestions(parsedQuestions);
 
-            }catch {
+            } catch {
                 console.log('Nenhum pergunta criada nessa sala!')
             }
         })

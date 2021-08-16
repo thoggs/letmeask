@@ -6,9 +6,9 @@ import {FormEvent, useState} from "react";
 import {useAuth} from "../hooks/useAuth";
 import {toast, Toaster} from "react-hot-toast";
 import {database} from "../services/firebase";
-import '../styles/room.scss';
 import {Question} from "../components/Question";
 import {useRoom} from "../hooks/useRoom";
+import '../styles/room.scss';
 
 
 type RoomParams = {
@@ -54,6 +54,18 @@ export function Room() {
         }
     }
 
+    async function hanbleLikeQuestion(questionId: string, likeId: string | undefined) {
+        if (likeId) {
+            await database.ref(`rooms/${roomId}/questions/${questionId}/likes/${likeId}`).remove();
+
+        } else {
+            await database.ref(`rooms/${roomId}/questions/${questionId}/likes`)
+                .push({
+                    authorId: user?.id
+                });
+        }
+    }
+
     return (
         <div id='page-room'>
             <Toaster position='top-center' reverseOrder={false}/>
@@ -90,8 +102,12 @@ export function Room() {
                     {questions.map(question => {
                         return (
                             <Question key={question.id} content={question.content} author={question.author}>
-                                <button className='like-button' type='button' aria-label='Marcar como gotei'>
-                                    <span>10</span>
+                                <button
+                                    onClick={() => hanbleLikeQuestion(question.id, question.likeId)}
+                                    className={`like-button ${question.likeId ? 'liked' : ''}`}
+                                    type='button'
+                                    aria-label='Marcar como gotei'>
+                                    {question.likeCount > 0 && <span>{question.likeCount}</span>}
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
                                         <path

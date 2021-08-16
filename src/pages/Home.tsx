@@ -43,7 +43,7 @@ export function Home() {
             <aside>
                 <img src={illustrationImg} alt='Ilustrtação simbolizando perguntas e respostas'/>
                 <strong>Crie Salas de Q&A ao-vivo</strong>
-                <p>Tire todas as suas dúvidas em tempo-real</p>
+                <p>Tire todas as suas dúvidas TESTE DE DEPLOY tempo-real</p>
             </aside>
             <main>
                 <div className='main-content'>

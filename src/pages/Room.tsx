@@ -1,13 +1,13 @@
 import logoImg from '../assets/images/logo.svg'
-import {Button} from "../components/Button";
-import {RoomCode} from "../components/RoomCode";
-import {useParams} from "react-router-dom";
-import {FormEvent, useState} from "react";
-import {useAuth} from "../hooks/useAuth";
-import {toast, Toaster} from "react-hot-toast";
-import {database} from "../services/firebase";
-import {Question} from "../components/Question";
-import {useRoom} from "../hooks/useRoom";
+import { Button } from "../components/Button";
+import { RoomCode } from "../components/RoomCode";
+import { useParams } from "react-router-dom";
+import { FormEvent, useState } from "react";
+import { useAuth } from "../hooks/useAuth";
+import { toast, Toaster } from "react-hot-toast";
+import { database } from "../services/firebase";
+import { Question } from "../components/Question";
+import { useRoom } from "../hooks/useRoom";
 import '../styles/room.scss';
 
 
@@ -16,11 +16,18 @@ type RoomParams = {
 }
 
 export function Room() {
-  const user = useAuth().user;
+  const {user, signInWithGoogle} = useAuth();
   const params = useParams<RoomParams>();
   const roomId = params.id;
   const [newQuestion, setNewQuestion] = useState('');
   const {title, questions} = useRoom(roomId);
+
+  async function handleCreateRoom() {
+    if (!user) {
+      await signInWithGoogle();
+    }
+    // history.push('/rooms/new');
+  }
 
   async function handleSendQuestion(event: FormEvent) {
     event.preventDefault();
@@ -93,7 +100,7 @@ export function Room() {
                 <span>{user.name}</span>
               </div>
             ) : (
-              <span>Para enviar Pergunta, <button>faça seu login</button></span>
+              <span>Para enviar Pergunta, <button onClick={handleCreateRoom}>faça seu login</button></span>
             )}
             <Button disabled={!user} type='submit'>Enviar pergunta</Button>
           </div>

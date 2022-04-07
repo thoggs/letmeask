@@ -4,6 +4,8 @@
 /node_modules
 /.pnp
 /.idea
+.yarn
+/.yarn
 .firebase
 .pnp.js
 
